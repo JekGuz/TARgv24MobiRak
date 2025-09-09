@@ -8,7 +8,7 @@
 
 <Shell.TitleView>
     <Label
-            Text="Näidised"
+            Text="Näidised:"
             FontFamily="Luismi Murder 400"
             FontSize="30"
             TextColor="DarkGoldenrod"
