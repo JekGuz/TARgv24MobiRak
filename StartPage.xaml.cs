@@ -1,9 +1,9 @@
-namespace TARgv24;
+﻿namespace TARgv24;
 
 public partial class StartPage : ContentPage
 {
-	public List<ContentPage> lehed = new List<ContentPage>() { new TextPage(), new FigurePage() };
-	public List<string> tekstid = new List<string>() { "Tee lahti leht Tekst-ga", "Figure" };
+	public List<ContentPage> lehed = new List<ContentPage>() { new TextPage(), new FigurePage(), new TimePage() };
+	public List<string> tekstid = new List<string>() { "Tee lahti leht Tekst-ga", "Figure leht", "Käivitamine timer" };
 	ScrollView sv;
 	VerticalStackLayout vsl;
 
@@ -17,7 +17,7 @@ public partial class StartPage : ContentPage
 			Button nupp = new Button
 			{
 				Text = tekstid[i],
-				FontSize = 20,
+				FontSize = 40,
 				BackgroundColor = Color.FromRgb(200, 200, 100),
 				TextColor = Colors.Black,
 				CornerRadius = 20,
