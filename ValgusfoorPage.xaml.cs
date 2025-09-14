@@ -3,7 +3,8 @@ namespace TARgv24
 {
     public partial class ValgusfoorPage : ContentPage
     {
-
+        // Выключеный светофор
+        Color offColor = Colors.DarkGray;
         public ValgusfoorPage()
         {
             var valgefoor_title = new Label
@@ -19,7 +20,7 @@ namespace TARgv24
                 WidthRequest = 100,
                 HeightRequest = 100,
                 CornerRadius = 50,
-                Color = Colors.Red,
+                Color = offColor,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center
             };
@@ -29,7 +30,7 @@ namespace TARgv24
                 WidthRequest = 100,
                 HeightRequest = 100,
                 CornerRadius = 50,
-                Color = Colors.Yellow,
+                Color = offColor,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center
             };
@@ -39,7 +40,7 @@ namespace TARgv24
                 WidthRequest = 100,
                 HeightRequest = 100,
                 CornerRadius = 50,
-                Color = Colors.Green,
+                Color = offColor,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center
             };
@@ -74,7 +75,7 @@ namespace TARgv24
             };
             Button valju = new Button
             {
-                Text = "Välju",
+                Text = "Välja",
                 FontSize = 40,
                 BackgroundColor = Color.FromRgb(200, 200, 100),
                 TextColor = Colors.Black,
