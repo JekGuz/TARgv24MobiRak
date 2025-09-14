@@ -25,6 +25,12 @@ namespace TARgv24
         private const int NightOn = 700; // Для ночного режима гореть желтый будет
         private const int NightOff = 500; // Пауза эмитация мигания
 
+        // Лайбел для надписей
+        private Label redText;
+        private Label yellowText;
+        private Label greenText;
+        private Label ooText;
+
 
         public ValgusfoorPage()
         {
@@ -47,6 +53,24 @@ namespace TARgv24
                 VerticalOptions = LayoutOptions.Center
             };
 
+            redText = new Label
+            {
+                Text = "Seisa",
+                FontSize = 20,
+                FontAttributes = FontAttributes.Bold,
+                TextColor = Colors.Black,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
+                IsVisible = false //Скрывем, чтобы в нужный момент открыть
+            };
+
+            var redGrid = new Grid //это контейнер, который умеет «накладывать» элементы друг на друга или раскладывать их в таблицу (строки и колонки).
+            {
+                WidthRequest = 100,
+                HeightRequest = 100,
+                Children = { redLamp, redText } // текст поверх круга
+            };
+
             yellowLamp = new BoxView
             {
                 WidthRequest = 100,
@@ -55,6 +79,35 @@ namespace TARgv24
                 Color = offColor,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center
+            };
+
+            yellowText = new Label
+            {
+                Text = "Valmista",
+                FontSize = 20,
+                FontAttributes = FontAttributes.Bold,
+                TextColor = Colors.Black,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
+                IsVisible = false
+            };
+
+            ooText = new Label
+            {
+                Text = "Kontrolli",
+                FontSize = 20,
+                FontAttributes = FontAttributes.Bold,
+                TextColor = Colors.Black,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
+                IsVisible = false
+            };
+
+            var yellowGrid = new Grid
+            {
+                WidthRequest = 100,
+                HeightRequest = 100,
+                Children = { yellowLamp, yellowText, ooText }
             };
 
             greenLamp = new BoxView
@@ -66,13 +119,32 @@ namespace TARgv24
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center
             };
-            // Кнопки вместе
+
+            greenText = new Label
+            {
+                Text = "Sõida",
+                FontSize = 20,
+                FontAttributes = FontAttributes.Bold,
+                TextColor = Colors.Black,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
+                IsVisible = false
+            };
+
+            var greenGrid = new Grid
+            {
+                WidthRequest = 100,
+                HeightRequest = 100,
+                Children = { greenLamp, greenText }
+            };
+
+            // Светофор вместе
             var vls = new VerticalStackLayout
             {
                 Spacing = 16,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
-                Children = { redLamp, yellowLamp, greenLamp } // Изменяем на мои лампы
+                Children = { redGrid, yellowGrid, greenGrid }
             };
 
             // Корпус светофора (Frame)
@@ -187,6 +259,10 @@ namespace TARgv24
                     redLamp.Color = Colors.Red;
                     yellowLamp.Color = offColor;
                     greenLamp.Color = offColor;
+                    redText.IsVisible = true; // Делаем видимым
+                    yellowText.IsVisible = false; // Невидимо
+                    ooText.IsVisible = false; // Невидимо
+                    greenText.IsVisible = false; // Невидимо
                     await Task.Delay(OnLight);
                     if (tootab == false) break;
 
@@ -194,6 +270,10 @@ namespace TARgv24
                     redLamp.Color = offColor;
                     yellowLamp.Color = Colors.Yellow;
                     greenLamp.Color = offColor;
+                    redText.IsVisible = false;
+                    yellowText.IsVisible = true; // Делаем видимым
+                    ooText.IsVisible = false;
+                    greenText.IsVisible = false;
                     await Task.Delay(OnLight);
                     if (tootab == false) break;
 
@@ -201,6 +281,10 @@ namespace TARgv24
                     redLamp.Color = offColor;
                     yellowLamp.Color = offColor;
                     greenLamp.Color = Colors.Green;
+                    redText.IsVisible = false;
+                    yellowText.IsVisible = false;
+                    ooText.IsVisible = false;
+                    greenText.IsVisible = true; // Делаем видимым
                     await Task.Delay(OnLight);
                     // Повторяется
                 }
@@ -209,12 +293,17 @@ namespace TARgv24
                     // Ночной режим
                     redLamp.Color = offColor;
                     greenLamp.Color = offColor;
-
                     yellowLamp.Color = Colors.Yellow;
+                    redText.IsVisible = false;
+                    yellowText.IsVisible = false;
+                    ooText.IsVisible = true; // Делаем видимым
+                    greenText.IsVisible = false;
+        
                     await Task.Delay(NightOn);
                     if (tootab == false) break;
 
                     yellowLamp.Color = offColor;
+                    ooText.IsVisible = false;
                     await Task.Delay(NightOff);
                     //Повторяется
                 }
@@ -227,6 +316,10 @@ namespace TARgv24
             redLamp.Color = offColor;
             yellowLamp.Color = offColor;
             greenLamp.Color = offColor;
+            redText.IsVisible = false;
+            yellowText.IsVisible = false;
+            ooText.IsVisible= false;
+            greenText.IsVisible = false;
         }
     }
 }
