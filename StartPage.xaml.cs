@@ -2,8 +2,8 @@
 
 public partial class StartPage : ContentPage
 {
-	public List<ContentPage> lehed = new List<ContentPage>() { new TextPage(), new FigurePage(), new TimePage(), new ValgusfoorPage() };
-	public List<string> tekstid = new List<string>() { "Tee lahti leht Tekst-ga", "Figure leht", "Käivitamine timer", "Valgusfoor" };
+	public List<ContentPage> lehed = new List<ContentPage>() { new TextPage(), new FigurePage(), new TimePage(), new DateTimePage(), new ValgusfoorPage() };
+	public List<string> tekstid = new List<string>() { "Tee lahti leht Tekst-ga", "Figure leht", "Käivitamine timer", "DateTimePage", "Valgusfoor" };
 	ScrollView sv;
 	VerticalStackLayout vsl;
 

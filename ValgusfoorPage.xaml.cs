@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
@@ -8,6 +7,7 @@ namespace TARgv24
 {
     public partial class ValgusfoorPage : ContentPage
     {
+        // Попробовать обощить сделать лист...
         // Выключеный светофор
         Color offColor = Colors.DarkGray;
 
@@ -30,7 +30,6 @@ namespace TARgv24
         private Label yellowText;
         private Label greenText;
         private Label ooText;
-
 
         public ValgusfoorPage()
         {
@@ -237,12 +236,12 @@ namespace TARgv24
 
             // Задний фон и название
             Title = "Valgusfoor";
-            BackgroundColor = Colors.White;
+            //BackgroundColor = Colors.MistyRose;
         }
         // ------------------------------------------------------ Обработчика кнопок и логика (т.к теряю)-----------------
 
         private async void Sisse_Clicked(object sender, EventArgs e)
-        {
+        {   
             ooMode = false; // Дневной режим
             if (tootab) return;
             tootab = true;
