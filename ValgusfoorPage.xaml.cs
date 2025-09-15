@@ -53,6 +53,21 @@ namespace TARgv24
                 VerticalOptions = LayoutOptions.Center
             };
 
+            // Под светофором label
+            //var redLabel = new Label 
+            //{ 
+            //    Text = "Seisa", 
+            //    FontSize = 20, 
+            //    TextColor = Colors.White, 
+            //    HorizontalTextAlignment = TextAlignment.Center 
+            //}; 
+            //var redStack = new VerticalStackLayout 
+            //{ 
+            //    Spacing = 4, 
+            //    HorizontalOptions = LayoutOptions.Center, 
+            //    Children = { redLamp, redLabel } 
+            //};
+
             redText = new Label
             {
                 Text = "Seisa",
