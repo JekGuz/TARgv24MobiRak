@@ -2,8 +2,8 @@
 
 public partial class StartPage : ContentPage
 {
-	public List<ContentPage> lehed = new List<ContentPage>() { new TextPage(), new FigurePage(), new TimePage(), new DateTimePage(), new ValgusfoorPage() };
-	public List<string> tekstid = new List<string>() { "Tee lahti leht Tekst-ga", "Figure leht", "Käivitamine timer", "DateTimePage", "Valgusfoor" };
+	public List<ContentPage> lehed = new List<ContentPage>() { new TextPage(), new FigurePage(), new TimePage(), new DateTimePage(), new ValgusfoorPage(), new Lumememm() };
+	public List<string> tekstid = new List<string>() { "Tee lahti leht Tekst-ga", "Figure leht", "Käivitamine timer", "DateTimePage", "Valgusfoor", "Lumememm" };
 	ScrollView sv;
 	VerticalStackLayout vsl;
 
@@ -12,15 +12,16 @@ public partial class StartPage : ContentPage
 	{
 		InitializeComponent();
 		Title = "Avaleht";
-		vsl = new VerticalStackLayout { BackgroundColor = Color.FromRgb(120, 30, 50) };
+		vsl = new VerticalStackLayout {  };
 		for (int i = 0; i < lehed.Count; i++) {
 			Button nupp = new Button
 			{
 				Text = tekstid[i],
 				FontSize = 40,
-				BackgroundColor = Color.FromRgb(200, 200, 100),
-				TextColor = Colors.Black,
-				CornerRadius = 20,
+				BackgroundColor = Colors.Transparent,
+				TextColor = Colors.LightGoldenrodYellow,
+                FontAttributes = FontAttributes.Bold, //жирный шрифт
+                CornerRadius = 20,
 				FontFamily = "Luismi Murder 400",
 				ZIndex = i
 			};

@@ -165,7 +165,7 @@ namespace TARgv24
             var korpus = new Frame
             {
                 BackgroundColor = Colors.Black,
-                BorderColor = Colors.Gray,
+                BorderColor = Colors.Black,
                 CornerRadius = 24,
                 Content = vls,
                 Padding = 16,
@@ -237,6 +237,7 @@ namespace TARgv24
             // Задний фон и название
             Title = "Valgusfoor";
             //BackgroundColor = Colors.MistyRose;
+            BackgroundImageSource = "city.png";
         }
         // ------------------------------------------------------ Обработчика кнопок и логика (т.к теряю)-----------------
 

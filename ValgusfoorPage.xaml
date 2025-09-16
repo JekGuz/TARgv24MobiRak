@@ -4,9 +4,9 @@
              x:Class="TARgv24.ValgusfoorPage"
              Title="ValgusfoorPage">
 
-    <ContentPage.BackgroundImageSource>
+    <!--<ContentPage.BackgroundImageSource>
         <FileImageSource File="city.png" />
-    </ContentPage.BackgroundImageSource>
+    </ContentPage.BackgroundImageSource>-->
 
     <VerticalStackLayout>
         <Label 

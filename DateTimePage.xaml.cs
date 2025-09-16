@@ -6,19 +6,23 @@ public partial class DateTimePage : ContentPage
     Label mis_on_valitud;
     DatePicker datePicker;
     TimePicker timePicker;
+    Picker picker;
+    Slider slider; // Плавно регулирует
+    Stepper stepper; // Пошагово
     AbsoluteLayout al;
     public DateTimePage()
     {
         mis_on_valitud = new Label
         {
-            Text = "Siin on kuvatakse valitud kuupäev või kellaaeg",
-            FontSize = 40,
-            TextColor = Colors.White,
+            Text = "Siin kuvatakse valitud kuupäev/kellaaeg",
+            FontSize = 30,
+            TextColor = Colors.RoyalBlue,    // Поменяла на другой цвет
             FontFamily = "Luismi Murder 400",
         };
-        datePicker = new DatePicker 
+
+        datePicker = new DatePicker
         {
-            FontSize = 40,
+            FontSize = 30,
             TextColor = Colors.Black,
             FontFamily = "Luismi Murder 400",
             MinimumDate = DateTime.Now.AddDays(-7), // New DateTime (1000, 1, 1 )
@@ -28,12 +32,110 @@ public partial class DateTimePage : ContentPage
         };
 
         datePicker.DateSelected += Kuupaeva_valimine;
-        al = new AbsoluteLayout { Children = { mis_on_valitud, datePicker } };
-        AbsoluteLayout.SetLayoutBounds(mis_on_valitud, new Rect(0.5, 0.2, 0.9, 0.2));
-        AbsoluteLayout.SetLayoutFlags(mis_on_valitud, AbsoluteLayoutFlags.All);
+
+        timePicker = new TimePicker
+        {
+            FontSize = 30,
+            TextColor = Colors.Black,
+            FontFamily = "Luismi Murder 400",
+            Time = new TimeSpan(12, 0, 0),
+            Format = "T",
+        };
+        timePicker.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName == TimePicker.TimeProperty.PropertyName)
+            {
+                mis_on_valitud.Text = $"Valisite kelleaja: {timePicker.Time}";
+            }
+        };
+
+        picker = new Picker
+        {
+            Title = "Vali üks",
+            FontSize = 30,
+            FontFamily = "Luismi Murder 400",
+            TextColor = Colors.Black,
+            ItemsSource = new List<string> { "Üks", "Kaks", "Kolm", "Neli", "Viis", "Kuus", "Seitse", "Kaheksa", "Üheksa", "Kuume", "Üksteist", "Kaksteist" }
+        };
+
+        //picker.Items.Add("Kuus");
+        //picker.ItemsSource.Add("Kuus");
+        picker.SelectedIndexChanged += (s, e) =>
+        {
+            if (picker.SelectedIndex != -1)
+            {
+                mis_on_valitud.Text = $"Valitud on: {picker.Items[picker.SelectedIndex]}";
+            }
+        };
+
+        slider = new Slider
+        {
+            Minimum = 0,
+            Maximum = 360,
+            Value = 40,
+            ThumbColor = Colors.DarkBlue,
+            MinimumTrackColor = Colors.MistyRose,
+            MaximumTrackColor = Colors.BlueViolet,
+        };
+
+        slider.ValueChanged += (s, e) =>
+        {
+            mis_on_valitud.FontSize = e.NewValue;
+            mis_on_valitud.Rotation = e.NewValue;
+        };
+
+        stepper = new Stepper
+        {
+            Minimum = 0,
+            Maximum = 100,
+            Increment = 1,
+            Value = 20,
+            HorizontalOptions = LayoutOptions.Center,
+        };
+
+        stepper.ValueChanged += (s, e) =>
+        {
+            mis_on_valitud.Text = $"Stepper value: {e.NewValue}";
+        };
+
+        al = new AbsoluteLayout { Children = { mis_on_valitud, datePicker, timePicker, picker, slider, stepper } };
+
+        //AbsoluteLayout.SetLayoutBounds(mis_on_valitud, new Rect(0.5, 0.0, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+        ////AbsoluteLayout.SetLayoutFlags(mis_on_valitud, AbsoluteLayoutFlags.All);
+        //AbsoluteLayout.SetLayoutFlags(mis_on_valitud, AbsoluteLayoutFlags.PositionProportional);
+
+        //AbsoluteLayout.SetLayoutBounds(datePicker, new Rect(0.5, 0.2, 0.9, AbsoluteLayout.AutoSize));
+        ////AbsoluteLayout.SetLayoutFlags(datePicker, AbsoluteLayoutFlags.All);
+        //AbsoluteLayout.SetLayoutFlags(datePicker, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
+
+        //AbsoluteLayout.SetLayoutBounds(timePicker, new Rect(0.5, 0.4, 0.9, AbsoluteLayout.AutoSize));
+        ////AbsoluteLayout.SetLayoutFlags(timePicker, AbsoluteLayoutFlags.All);
+        //AbsoluteLayout.SetLayoutFlags(timePicker, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
+
+        //AbsoluteLayout.SetLayoutBounds(picker, new Rect(0.5, 0.6, 0.9, AbsoluteLayout.AutoSize));
+        ////AbsoluteLayout.SetLayoutFlags(piker, AbsoluteLayoutFlags.All);
+        //AbsoluteLayout.SetLayoutFlags(picker, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
+
+        //AbsoluteLayout.SetLayoutBounds(slider, new Rect(0.5, 0.8, 0.9, AbsoluteLayout.AutoSize));
+        ////AbsoluteLayout.SetLayoutFlags(slider, AbsoluteLayoutFlags.All);
+        //AbsoluteLayout.SetLayoutFlags(slider, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
+
+        //AbsoluteLayout.SetLayoutBounds(stepper, new Rect(0.5, 1, 0.9, AbsoluteLayout.AutoSize));
+        ////AbsoluteLayout.SetLayoutFlags(stepper, AbsoluteLayoutFlags.All);
+        //AbsoluteLayout.SetLayoutFlags(stepper, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
+
+        var elementid = new View[]
+        {
+            mis_on_valitud, datePicker, timePicker, picker, slider, stepper
+        };
+        for (int i = 0; i < elementid.Length; i++)
+        {
+            AbsoluteLayout.SetLayoutBounds(elementid[i], new Rect(0.5, i * 0.2, 0.9, 0.15));
+            AbsoluteLayout.SetLayoutFlags(elementid[i], AbsoluteLayoutFlags.All);
+            //AbsoluteLayout.SetLayoutFlags(elementid[i], AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
+        }
         Content = al;
     }
-
     private void Kuupaeva_valimine(object? sender, DateChangedEventArgs e)
     {
         mis_on_valitud.Text = $"Valisite kuupäev: {e.NewDate:D}";

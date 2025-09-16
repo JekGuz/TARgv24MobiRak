@@ -19,7 +19,7 @@ public partial class TextPage : ContentPage
         };
         editorTekst = new Editor
         {
-            FontSize = 40,
+            FontSize = 50,
             BackgroundColor = Color.FromRgb(200, 200, 100),
             TextColor = Colors.Black,
             FontFamily = "Luismi Murder 400",
@@ -31,7 +31,7 @@ public partial class TextPage : ContentPage
         editorTekst.TextChanged += EditorTekst_TextChanged;
         btn = new Button
         {
-            FontSize = 30,
+            FontSize = 40,
             Text = "Loe tekst",
             FontFamily = "Luismi Murder 400",
             BackgroundColor = Color.FromRgb(200, 200, 100),
