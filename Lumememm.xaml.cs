@@ -71,6 +71,18 @@ public partial class Lumememm : ContentPage
             HasShadow = false // Убираем тени
         };
 
+        BoxView kasi1 = new BoxView
+        {
+            Color = Colors.SaddleBrown,
+            Rotation = -30 // наклон влево вверх
+        };
+
+        BoxView kasi2 = new BoxView
+        {
+            Color = Colors.SaddleBrown,
+            Rotation = 30 // наклон право вверх
+        };
+
         Border nupp1 = new Border
         {
             Background = Colors.Black,
@@ -92,7 +104,7 @@ public partial class Lumememm : ContentPage
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
         };
 
-        taust = new AbsoluteLayout { Children = { amber, amber2, silm1, silm2 ,pea, sall1, sall2, nina, keha, nupp1, nupp2, nupp3 } };
+        taust = new AbsoluteLayout { Children = { amber, amber2, silm1, silm2 ,pea, sall1, sall2, nina, keha, kasi1, kasi2, nupp1, nupp2, nupp3 } };
         Background = Colors.LightSkyBlue;
 
         AbsoluteLayout.SetLayoutBounds(amber, new Rect(0.5, 0.20, 60, 80));
@@ -128,9 +140,17 @@ public partial class Lumememm : ContentPage
         AbsoluteLayout.SetLayoutFlags(silm2, AbsoluteLayoutFlags.PositionProportional);
         silm2.ZIndex = 5;
 
-        AbsoluteLayout.SetLayoutBounds(keha, new Rect(0.5, 0.50, 180, 180));
+        AbsoluteLayout.SetLayoutBounds(keha, new Rect(0.5, 0.5, 180, 180));
         AbsoluteLayout.SetLayoutFlags(keha, AbsoluteLayoutFlags.PositionProportional);
         keha.ZIndex = 1;
+
+        AbsoluteLayout.SetLayoutBounds(kasi1, new Rect(0.15, 0.52, 100, 14));
+        AbsoluteLayout.SetLayoutFlags(kasi1, AbsoluteLayoutFlags.PositionProportional);
+        kasi1.ZIndex = 9;
+
+        AbsoluteLayout.SetLayoutBounds(kasi2, new Rect(0.9, 0.45, 100, 14));
+        AbsoluteLayout.SetLayoutFlags(kasi2, AbsoluteLayoutFlags.PositionProportional);
+        kasi2.ZIndex = 9;
 
         AbsoluteLayout.SetLayoutBounds(nupp2, new Rect(0.5, 0.45, 10, 10));
         AbsoluteLayout.SetLayoutFlags(nupp2, AbsoluteLayoutFlags.PositionProportional);
@@ -147,7 +167,7 @@ public partial class Lumememm : ContentPage
         Content = taust;
 
     }
-    // ---------------------------------------------------------- НОС
+    // ---------------------------------------------------------- НОС рисуем в канве ------------------------------------------------------------
     public class ninajoonis : IDrawable
     {
         public void Draw(ICanvas canvas, RectF dirtyRect) // dirtyRect — прямоугольник, в пределах которого происходит рисование
