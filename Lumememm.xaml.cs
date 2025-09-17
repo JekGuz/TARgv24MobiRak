@@ -1,4 +1,6 @@
+using System.Net.Sockets;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
 
 namespace TARgv24;
@@ -8,27 +10,108 @@ public partial class Lumememm : ContentPage
     {
         AbsoluteLayout taust;
 
+        // Ведро
+        BoxView amber = new BoxView
+        {
+            Color = Colors.SaddleBrown
+        };
+
+        BoxView amber2 = new BoxView
+        {
+            Color = Colors.SaddleBrown
+        };
+
         // Голова (круг)
         Frame pea = new Frame
         {
             BackgroundColor = Colors.GhostWhite,
             CornerRadius = 50,
+            HasShadow = false // Убираем тени
         };
 
+        // Глаза (круг)
+        Border silm1 = new Border
+        {
+            Background = Colors.Black,
+            StrokeThickness = 0,
+            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
+        };
+
+        Border silm2 = new Border
+        {
+            Background = Colors.Black,
+            StrokeThickness = 0,
+            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
+        };
+
+        // Тело (круг)
         Frame keha = new Frame
         {
             BackgroundColor = Colors.GhostWhite,
             CornerRadius = 90,
+            HasShadow = false // Убираем тени
         };
 
-        taust = new AbsoluteLayout { Children = { pea, keha } };
+        Border nupp1 = new Border
+        {
+            Background = Colors.Black,
+            StrokeThickness = 0,
+            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
+        };
+
+        Border nupp2 = new Border
+        {
+            Background = Colors.Black,
+            StrokeThickness = 0,
+            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
+        };
+
+        Border nupp3 = new Border
+        {
+            Background = Colors.Black,
+            StrokeThickness = 0,
+            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
+        };
+
+        taust = new AbsoluteLayout { Children = { amber, amber2, silm1, silm2 ,pea, keha, nupp1, nupp2, nupp3 } };
         Background = Colors.LightSkyBlue;
+
+        AbsoluteLayout.SetLayoutBounds(amber, new Rect(0.5, 0.20, 60, 80));
+        AbsoluteLayout.SetLayoutFlags(amber, AbsoluteLayoutFlags.PositionProportional);
+        amber.ZIndex = 3; // поверх головы
+        // Порядок наложения элементов задаётся порядком добавления в Children (не вышло, тени убираем) или через ZIndex
+
+        AbsoluteLayout.SetLayoutBounds(amber2, new Rect(0.5, 0.28, 100, 14));
+        AbsoluteLayout.SetLayoutFlags(amber2, AbsoluteLayoutFlags.PositionProportional);
+        amber2.ZIndex = 4;
 
         AbsoluteLayout.SetLayoutBounds(pea, new Rect(0.5, 0.32, 100, 100));
         AbsoluteLayout.SetLayoutFlags(pea, AbsoluteLayoutFlags.PositionProportional);
+        pea.ZIndex = 2;
+
+        AbsoluteLayout.SetLayoutBounds(silm1, new Rect(0.45, 0.32, 10, 10));
+        AbsoluteLayout.SetLayoutFlags(silm1, AbsoluteLayoutFlags.PositionProportional);
+        silm1.ZIndex = 5;
+
+        AbsoluteLayout.SetLayoutBounds(silm2, new Rect(0.55, 0.32, 10, 10));
+        AbsoluteLayout.SetLayoutFlags(silm2, AbsoluteLayoutFlags.PositionProportional);
+        silm2.ZIndex = 5;
 
         AbsoluteLayout.SetLayoutBounds(keha, new Rect(0.5, 0.50, 180, 180));
         AbsoluteLayout.SetLayoutFlags(keha, AbsoluteLayoutFlags.PositionProportional);
+        keha.ZIndex = 1;
+
+        AbsoluteLayout.SetLayoutBounds(nupp2, new Rect(0.5, 0.45, 10, 10));
+        AbsoluteLayout.SetLayoutFlags(nupp2, AbsoluteLayoutFlags.PositionProportional);
+        nupp2.ZIndex = 6;
+
+        AbsoluteLayout.SetLayoutBounds(nupp1, new Rect(0.5, 0.50, 10, 10));
+        AbsoluteLayout.SetLayoutFlags(nupp1, AbsoluteLayoutFlags.PositionProportional);
+        nupp1.ZIndex = 6;
+
+        AbsoluteLayout.SetLayoutBounds(nupp3, new Rect(0.5, 0.55, 10, 10));
+        AbsoluteLayout.SetLayoutFlags(nupp3, AbsoluteLayoutFlags.PositionProportional);
+        nupp3.ZIndex = 6;
 
         Content = taust;
 

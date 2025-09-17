@@ -1,4 +1,6 @@
-﻿namespace TARgv24;
+﻿using System.Buffers.Text;
+
+namespace TARgv24;
 
 public partial class StartPage : ContentPage
 {
@@ -25,7 +27,10 @@ public partial class StartPage : ContentPage
 				FontFamily = "Luismi Murder 400",
 				ZIndex = i
 			};
-			vsl.Add(nupp);
+
+            
+
+            vsl.Add(nupp);
 			nupp.Clicked += Nupp_Clicked;
 		}
 		sv = new ScrollView { Content = vsl };
