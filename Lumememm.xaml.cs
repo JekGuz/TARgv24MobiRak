@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
 
+
 namespace TARgv24;
 public partial class Lumememm : ContentPage
 {
@@ -33,8 +34,8 @@ public partial class Lumememm : ContentPage
         Border silm1 = new Border
         {
             Background = Colors.Black,
-            StrokeThickness = 0,
-            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
+            StrokeThickness = 0,  // Это толщина обводки (рамки) у элемента Border
+            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) } //StrokeShape задаёт форму рамки/заливки, RoundRectangle — это прямоугольник со скруглёнными углами, CornerRadius = new CornerRadius(10) — радиус скругления углов (10 пикселей).
         };
 
         Border silm2 = new Border
@@ -42,6 +43,24 @@ public partial class Lumememm : ContentPage
             Background = Colors.Black,
             StrokeThickness = 0,
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
+        };
+
+        // Нос нарисон ниже в канве
+        GraphicsView nina = new GraphicsView
+        {
+            Drawable = new ninajoonis()
+        };
+
+
+        // Шарф
+        BoxView sall1 = new BoxView 
+        { 
+            Color = Colors.Red 
+        };
+
+        BoxView sall2 = new BoxView 
+        { 
+            Color = Colors.Red 
         };
 
         // Тело (круг)
@@ -73,7 +92,7 @@ public partial class Lumememm : ContentPage
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
         };
 
-        taust = new AbsoluteLayout { Children = { amber, amber2, silm1, silm2 ,pea, keha, nupp1, nupp2, nupp3 } };
+        taust = new AbsoluteLayout { Children = { amber, amber2, silm1, silm2 ,pea, sall1, sall2, nina, keha, nupp1, nupp2, nupp3 } };
         Background = Colors.LightSkyBlue;
 
         AbsoluteLayout.SetLayoutBounds(amber, new Rect(0.5, 0.20, 60, 80));
@@ -88,6 +107,18 @@ public partial class Lumememm : ContentPage
         AbsoluteLayout.SetLayoutBounds(pea, new Rect(0.5, 0.32, 100, 100));
         AbsoluteLayout.SetLayoutFlags(pea, AbsoluteLayoutFlags.PositionProportional);
         pea.ZIndex = 2;
+
+        AbsoluteLayout.SetLayoutBounds(sall1, new Rect(0.5, 0.38, 120, 20));
+        AbsoluteLayout.SetLayoutFlags(sall1, AbsoluteLayoutFlags.PositionProportional);
+        sall1.ZIndex = 7;
+
+        AbsoluteLayout.SetLayoutBounds(sall2, new Rect(0.55, 0.42, 20, 60));
+        AbsoluteLayout.SetLayoutFlags(sall2, AbsoluteLayoutFlags.PositionProportional);
+        sall2.ZIndex = 7;
+
+        AbsoluteLayout.SetLayoutBounds(nina, new Rect(0.55, 0.32, 50, 30));
+        AbsoluteLayout.SetLayoutFlags(nina, AbsoluteLayoutFlags.PositionProportional);
+        nina.ZIndex = 8;
 
         AbsoluteLayout.SetLayoutBounds(silm1, new Rect(0.45, 0.32, 10, 10));
         AbsoluteLayout.SetLayoutFlags(silm1, AbsoluteLayoutFlags.PositionProportional);
@@ -116,6 +147,24 @@ public partial class Lumememm : ContentPage
         Content = taust;
 
     }
+    // ---------------------------------------------------------- НОС
+    public class ninajoonis : IDrawable
+    {
+        public void Draw(ICanvas canvas, RectF dirtyRect) // dirtyRect — прямоугольник, в пределах которого происходит рисование
+        {
+            canvas.Antialias = true; // Сглажевание
+            canvas.FillColor = Colors.Orange;
+
+            PathF path = new PathF();
+            path.MoveTo(0, 15); // Первая точка
+            path.LineTo(70, 20); // Вторая точка (кончик носа вправо)
+            path.LineTo(0, 40); // Третья точка (нижняя часть у головы)
+            path.Close();
+
+            canvas.FillPath(path); // Заливаем получившийся треугольник цветом
+        }
+    }
+
 }
 
 
