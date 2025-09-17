@@ -71,16 +71,20 @@ public partial class Lumememm : ContentPage
             HasShadow = false // Убираем тени
         };
 
-        BoxView kasi1 = new BoxView
+        Border kasi1 = new Border
         {
-            Color = Colors.SaddleBrown,
-            Rotation = -30 // наклон влево вверх
+            Background = Colors.SaddleBrown,
+            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(7) }, // Закругления
+            StrokeThickness = 0, // Рамка не рисуется, остаётся только заливка
+            Rotation = -30 // Поворот
         };
 
-        BoxView kasi2 = new BoxView
+        Border kasi2 = new Border
         {
-            Color = Colors.SaddleBrown,
-            Rotation = 30 // наклон право вверх
+            Background = Colors.SaddleBrown,
+            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(7) },
+            StrokeThickness = 0,
+            Rotation = 30
         };
 
         Border nupp1 = new Border
@@ -144,11 +148,11 @@ public partial class Lumememm : ContentPage
         AbsoluteLayout.SetLayoutFlags(keha, AbsoluteLayoutFlags.PositionProportional);
         keha.ZIndex = 1;
 
-        AbsoluteLayout.SetLayoutBounds(kasi1, new Rect(0.15, 0.52, 100, 14));
+        AbsoluteLayout.SetLayoutBounds(kasi1, new Rect(0.15, 0.47, 100, 14));
         AbsoluteLayout.SetLayoutFlags(kasi1, AbsoluteLayoutFlags.PositionProportional);
         kasi1.ZIndex = 9;
 
-        AbsoluteLayout.SetLayoutBounds(kasi2, new Rect(0.9, 0.45, 100, 14));
+        AbsoluteLayout.SetLayoutBounds(kasi2, new Rect(0.85, 0.47, 100, 14));
         AbsoluteLayout.SetLayoutFlags(kasi2, AbsoluteLayoutFlags.PositionProportional);
         kasi2.ZIndex = 9;
 
