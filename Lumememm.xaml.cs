@@ -1,4 +1,4 @@
-using System.Net.Sockets;
+п»їusing System.Net.Sockets;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
@@ -11,7 +11,7 @@ public partial class Lumememm : ContentPage
     {
         AbsoluteLayout taust;
 
-        // Ведро
+        // Р’РµРґСЂРѕ
         BoxView amber = new BoxView
         {
             Color = Colors.SaddleBrown
@@ -22,20 +22,20 @@ public partial class Lumememm : ContentPage
             Color = Colors.SaddleBrown
         };
 
-        // Голова (круг)
+        // Р“РѕР»РѕРІР° (РєСЂСѓРі)
         Frame pea = new Frame
         {
             BackgroundColor = Colors.GhostWhite,
             CornerRadius = 50,
-            HasShadow = false // Убираем тени
+            HasShadow = false // РЈР±РёСЂР°РµРј С‚РµРЅРё
         };
 
-        // Глаза (круг)
+        // Р“Р»Р°Р·Р° (РєСЂСѓРі)
         Border silm1 = new Border
         {
             Background = Colors.Black,
-            StrokeThickness = 0,  // Это толщина обводки (рамки) у элемента Border
-            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) } //StrokeShape задаёт форму рамки/заливки, RoundRectangle — это прямоугольник со скруглёнными углами, CornerRadius = new CornerRadius(10) — радиус скругления углов (10 пикселей).
+            StrokeThickness = 0,  // Р­С‚Рѕ С‚РѕР»С‰РёРЅР° РѕР±РІРѕРґРєРё (СЂР°РјРєРё) Сѓ СЌР»РµРјРµРЅС‚Р° Border
+            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) } //StrokeShape Р·Р°РґР°С‘С‚ С„РѕСЂРјСѓ СЂР°РјРєРё/Р·Р°Р»РёРІРєРё, RoundRectangle вЂ” СЌС‚Рѕ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє СЃРѕ СЃРєСЂСѓРіР»С‘РЅРЅС‹РјРё СѓРіР»Р°РјРё, CornerRadius = new CornerRadius(10) вЂ” СЂР°РґРёСѓСЃ СЃРєСЂСѓРіР»РµРЅРёСЏ СѓРіР»РѕРІ (10 РїРёРєСЃРµР»РµР№).
         };
 
         Border silm2 = new Border
@@ -45,14 +45,14 @@ public partial class Lumememm : ContentPage
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
         };
 
-        // Нос нарисон ниже в канве
+        // РќРѕСЃ РЅР°СЂРёСЃРѕРЅ РЅРёР¶Рµ РІ РєР°РЅРІРµ
         GraphicsView nina = new GraphicsView
         {
             Drawable = new ninajoonis()
         };
 
 
-        // Шарф
+        // РЁР°СЂС„
         BoxView sall1 = new BoxView 
         { 
             Color = Colors.Red 
@@ -63,20 +63,20 @@ public partial class Lumememm : ContentPage
             Color = Colors.Red 
         };
 
-        // Тело (круг)
+        // РўРµР»Рѕ (РєСЂСѓРі)
         Frame keha = new Frame
         {
             BackgroundColor = Colors.GhostWhite,
             CornerRadius = 90,
-            HasShadow = false // Убираем тени
+            HasShadow = false // РЈР±РёСЂР°РµРј С‚РµРЅРё
         };
 
         Border kasi1 = new Border
         {
             Background = Colors.SaddleBrown,
-            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(7) }, // Закругления
-            StrokeThickness = 0, // Рамка не рисуется, остаётся только заливка
-            Rotation = -30 // Поворот
+            StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(7) }, // Р—Р°РєСЂСѓРіР»РµРЅРёСЏ
+            StrokeThickness = 0, // Р Р°РјРєР° РЅРµ СЂРёСЃСѓРµС‚СЃСЏ, РѕСЃС‚Р°С‘С‚СЃСЏ С‚РѕР»СЊРєРѕ Р·Р°Р»РёРІРєР°
+            Rotation = -30 // РџРѕРІРѕСЂРѕС‚
         };
 
         Border kasi2 = new Border
@@ -108,13 +108,102 @@ public partial class Lumememm : ContentPage
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
         };
 
+        // РљРЅРѕРїРєРё ---------------------------------------------------------------------------------------------------------------------
+        Button peida = new Button
+        {
+            Text = "Peida",
+            FontSize = 40,
+            BackgroundColor = Colors.DarkBlue,
+            TextColor = Colors.GhostWhite,
+            CornerRadius = 20,
+            FontFamily = "Luismi Murder 400",
+        };
+
+        Button naita = new Button
+        {
+            Text = "NГ¤ita",
+            FontSize = 40,
+            BackgroundColor = Colors.DarkBlue,
+            TextColor = Colors.GhostWhite,
+            CornerRadius = 20,
+            FontFamily = "Luismi Murder 400",
+        };
+
+        Button varvi = new Button
+        {
+            Text = "Muuta VГ¤rv",
+            FontSize = 40,
+            BackgroundColor = Colors.DarkBlue,
+            TextColor = Colors.GhostWhite,
+            CornerRadius = 20,
+            FontFamily = "Luismi Murder 400",
+        };
+
+        Button suluta = new Button
+        {
+            Text = "Suluta",
+            FontSize = 40,
+            BackgroundColor = Colors.DarkBlue,
+            TextColor = Colors.GhostWhite,
+            CornerRadius = 20,
+            FontFamily = "Luismi Murder 400",
+        };
+
+        Button tansi = new Button
+        {
+            Text = "Tansi",
+            FontSize = 40,
+            BackgroundColor = Colors.DarkBlue,
+            TextColor = Colors.GhostWhite,
+            CornerRadius = 20,
+            FontFamily = "Luismi Murder 400",
+        };
+
+        Button lahtesta = new Button
+        {
+            Text = "LГ¤htesta",
+            FontSize = 40,
+            BackgroundColor = Colors.DarkBlue,
+            TextColor = Colors.GhostWhite,
+            CornerRadius = 20,
+            FontFamily = "Luismi Murder 400",
+        };
+
+
+        Frame panel1 = new Frame
+        {
+            BackgroundColor = Colors.Transparent,
+            Padding = new Thickness(12, 10),
+            CornerRadius = 16,
+            HasShadow = true,
+            Content = new HorizontalStackLayout
+            {
+                Spacing = 10,
+                Children = { peida, naita, varvi }
+            }
+        };
+
+        Frame panel2 = new Frame
+        {
+            BackgroundColor = Colors.Transparent,
+            Padding = new Thickness(12, 10),
+            CornerRadius = 16,
+            HasShadow = true,
+            Content = new HorizontalStackLayout
+            {
+                Spacing = 10,
+                Children = { suluta, tansi, lahtesta }
+            }
+        };
+
+
         taust = new AbsoluteLayout { Children = { amber, amber2, silm1, silm2 ,pea, sall1, sall2, nina, keha, kasi1, kasi2, nupp1, nupp2, nupp3 } };
         Background = Colors.LightSkyBlue;
 
         AbsoluteLayout.SetLayoutBounds(amber, new Rect(0.5, 0.20, 60, 80));
         AbsoluteLayout.SetLayoutFlags(amber, AbsoluteLayoutFlags.PositionProportional);
-        amber.ZIndex = 3; // поверх головы
-        // Порядок наложения элементов задаётся порядком добавления в Children (не вышло, тени убираем) или через ZIndex
+        amber.ZIndex = 3; // РїРѕРІРµСЂС… РіРѕР»РѕРІС‹
+        // РџРѕСЂСЏРґРѕРє РЅР°Р»РѕР¶РµРЅРёСЏ СЌР»РµРјРµРЅС‚РѕРІ Р·Р°РґР°С‘С‚СЃСЏ РїРѕСЂСЏРґРєРѕРј РґРѕР±Р°РІР»РµРЅРёСЏ РІ Children (РЅРµ РІС‹С€Р»Рѕ, С‚РµРЅРё СѓР±РёСЂР°РµРј) РёР»Рё С‡РµСЂРµР· ZIndex
 
         AbsoluteLayout.SetLayoutBounds(amber2, new Rect(0.5, 0.28, 100, 14));
         AbsoluteLayout.SetLayoutFlags(amber2, AbsoluteLayoutFlags.PositionProportional);
@@ -168,26 +257,40 @@ public partial class Lumememm : ContentPage
         AbsoluteLayout.SetLayoutFlags(nupp3, AbsoluteLayoutFlags.PositionProportional);
         nupp3.ZIndex = 6;
 
+        AbsoluteLayout.SetLayoutBounds(panel1, new Rect(0.5, 0.75, 1.0, 90));
+        AbsoluteLayout.SetLayoutFlags(panel1, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
+        panel1.ZIndex = 20;
+
+        AbsoluteLayout.SetLayoutBounds(panel2, new Rect(0.5, 0.9, 1.0, 90));
+        AbsoluteLayout.SetLayoutFlags(panel2, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
+        panel2.ZIndex = 20;
+
+        taust.Children.Add(panel1);
+        taust.Children.Add(panel2);
         Content = taust;
 
     }
-    // ---------------------------------------------------------- НОС рисуем в канве ------------------------------------------------------------
+    // ---------------------------------------------------------- РќРћРЎ СЂРёСЃСѓРµРј РІ РєР°РЅРІРµ ------------------------------------------------------------
     public class ninajoonis : IDrawable
     {
-        public void Draw(ICanvas canvas, RectF dirtyRect) // dirtyRect — прямоугольник, в пределах которого происходит рисование
+        public void Draw(ICanvas canvas, RectF dirtyRect) // dirtyRect вЂ” РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє, РІ РїСЂРµРґРµР»Р°С… РєРѕС‚РѕСЂРѕРіРѕ РїСЂРѕРёСЃС…РѕРґРёС‚ СЂРёСЃРѕРІР°РЅРёРµ
         {
-            canvas.Antialias = true; // Сглажевание
+            canvas.Antialias = true; // РЎРіР»Р°Р¶РµРІР°РЅРёРµ
             canvas.FillColor = Colors.Orange;
 
             PathF path = new PathF();
-            path.MoveTo(0, 15); // Первая точка
-            path.LineTo(70, 20); // Вторая точка (кончик носа вправо)
-            path.LineTo(0, 40); // Третья точка (нижняя часть у головы)
+            path.MoveTo(0, 15); // РџРµСЂРІР°СЏ С‚РѕС‡РєР°
+            path.LineTo(70, 20); // Р’С‚РѕСЂР°СЏ С‚РѕС‡РєР° (РєРѕРЅС‡РёРє РЅРѕСЃР° РІРїСЂР°РІРѕ)
+            path.LineTo(0, 40); // РўСЂРµС‚СЊСЏ С‚РѕС‡РєР° (РЅРёР¶РЅСЏСЏ С‡Р°СЃС‚СЊ Сѓ РіРѕР»РѕРІС‹)
             path.Close();
 
-            canvas.FillPath(path); // Заливаем получившийся треугольник цветом
+            canvas.FillPath(path); // Р—Р°Р»РёРІР°РµРј РїРѕР»СѓС‡РёРІС€РёР№СЃСЏ С‚СЂРµСѓРіРѕР»СЊРЅРёРє С†РІРµС‚РѕРј
         }
     }
+
+    // ------------------------------------------------------Р¤СѓРЅРєС†РёРё-----------------------------------------------------------------
+
+
 
 }
 
