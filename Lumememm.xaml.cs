@@ -7,23 +7,28 @@ using Microsoft.Maui.Layouts;
 namespace TARgv24;
 public partial class Lumememm : ContentPage
 {
+    Frame pea, keha;
+    BoxView amber, amber2, sall1, sall2;
+    Border silm1, silm2, kasi1, kasi2, nupp1, nupp2, nupp3;
+    GraphicsView nina;
+
     public Lumememm()
     {
         AbsoluteLayout taust;
 
         // Ведро
-        BoxView amber = new BoxView
+      amber = new BoxView
         {
             Color = Colors.SaddleBrown
         };
 
-        BoxView amber2 = new BoxView
+        amber2 = new BoxView
         {
             Color = Colors.SaddleBrown
         };
 
         // Голова (круг)
-        Frame pea = new Frame
+        pea = new Frame
         {
             BackgroundColor = Colors.GhostWhite,
             CornerRadius = 50,
@@ -31,14 +36,14 @@ public partial class Lumememm : ContentPage
         };
 
         // Глаза (круг)
-        Border silm1 = new Border
+        silm1 = new Border
         {
             Background = Colors.Black,
             StrokeThickness = 0,  // Это толщина обводки (рамки) у элемента Border
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) } //StrokeShape задаёт форму рамки/заливки, RoundRectangle — это прямоугольник со скруглёнными углами, CornerRadius = new CornerRadius(10) — радиус скругления углов (10 пикселей).
         };
 
-        Border silm2 = new Border
+        silm2 = new Border
         {
             Background = Colors.Black,
             StrokeThickness = 0,
@@ -46,32 +51,32 @@ public partial class Lumememm : ContentPage
         };
 
         // Нос нарисон ниже в канве
-        GraphicsView nina = new GraphicsView
+        nina = new GraphicsView
         {
             Drawable = new ninajoonis()
         };
 
 
         // Шарф
-        BoxView sall1 = new BoxView 
+        sall1 = new BoxView 
         { 
             Color = Colors.Red 
         };
 
-        BoxView sall2 = new BoxView 
+        sall2 = new BoxView 
         { 
             Color = Colors.Red 
         };
 
         // Тело (круг)
-        Frame keha = new Frame
+        keha = new Frame
         {
             BackgroundColor = Colors.GhostWhite,
             CornerRadius = 90,
             HasShadow = false // Убираем тени
         };
 
-        Border kasi1 = new Border
+        kasi1 = new Border
         {
             Background = Colors.SaddleBrown,
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(7) }, // Закругления
@@ -79,7 +84,7 @@ public partial class Lumememm : ContentPage
             Rotation = -30 // Поворот
         };
 
-        Border kasi2 = new Border
+        kasi2 = new Border
         {
             Background = Colors.SaddleBrown,
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(7) },
@@ -87,21 +92,21 @@ public partial class Lumememm : ContentPage
             Rotation = 30
         };
 
-        Border nupp1 = new Border
+        nupp1 = new Border
         {
             Background = Colors.Black,
             StrokeThickness = 0,
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
         };
 
-        Border nupp2 = new Border
+        nupp2 = new Border
         {
             Background = Colors.Black,
             StrokeThickness = 0,
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
         };
 
-        Border nupp3 = new Border
+        nupp3 = new Border
         {
             Background = Colors.Black,
             StrokeThickness = 0,
@@ -119,6 +124,8 @@ public partial class Lumememm : ContentPage
             FontFamily = "Luismi Murder 400",
         };
 
+        peida.Clicked += peida_Clicked;
+
         Button naita = new Button
         {
             Text = "Näita",
@@ -128,6 +135,8 @@ public partial class Lumememm : ContentPage
             CornerRadius = 20,
             FontFamily = "Luismi Murder 400",
         };
+
+        naita.Clicked += naita_Clicked;
 
         Button varvi = new Button
         {
@@ -289,10 +298,37 @@ public partial class Lumememm : ContentPage
     }
 
     // ------------------------------------------------------Функции-----------------------------------------------------------------
+    private void peida_Clicked(object sender, EventArgs e)
+    {
+        foreach (var v in new View[] 
+        { pea, keha, amber, amber2, silm1, silm2, sall1, sall2, kasi1, kasi2, nupp1, nupp2, nupp3, nina })
+            v.IsVisible = false;
 
-
+        //pea.IsVisible = false;
+        //keha.IsVisible = false;
+        //amber.IsVisible = false;
+        //amber2.IsVisible = false;
+        //silm1.IsVisible = false;
+        //silm2.IsVisible = false;
+        //sall1.IsVisible = false;
+        //sall2.IsVisible = false;
+        //kasi1.IsVisible = false;
+        //kasi2.IsVisible = false;
+        //nupp1.IsVisible = false;
+        //nupp2.IsVisible = false;
+        //nupp3.IsVisible = false;
+        //nina.IsVisible = false;
+    }
+    private void naita_Clicked(object sender, EventArgs e)
+    {
+        foreach (var v in new View[] 
+        { pea, keha, amber, amber2, silm1, silm2, sall1, sall2, kasi1, kasi2, nupp1, nupp2, nupp3, nina })
+            v.IsVisible = true;
+    }
 
 }
+
+
 
 
 
