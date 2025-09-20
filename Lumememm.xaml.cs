@@ -12,12 +12,17 @@ public partial class Lumememm : ContentPage
     Border silm1, silm2, kasi1, kasi2, nupp1, nupp2, nupp3;
     GraphicsView nina;
 
+    View[] tervalumememm; // будущий масив со всеми частятми
+
+    Random rnd = new Random();
+    Color[] colors = { Colors.GhostWhite, Colors.LightYellow, Colors.LightPink, Colors.LightGreen, Colors.LightBlue, Colors.MintCream, Colors.Aqua, Colors.LightCoral, Colors.LightSalmon };
+
     public Lumememm()
     {
         AbsoluteLayout taust;
 
         // Ведро
-      amber = new BoxView
+        amber = new BoxView
         {
             Color = Colors.SaddleBrown
         };
@@ -58,14 +63,14 @@ public partial class Lumememm : ContentPage
 
 
         // Шарф
-        sall1 = new BoxView 
-        { 
-            Color = Colors.Red 
+        sall1 = new BoxView
+        {
+            Color = Colors.Red
         };
 
-        sall2 = new BoxView 
-        { 
-            Color = Colors.Red 
+        sall2 = new BoxView
+        {
+            Color = Colors.Red
         };
 
         // Тело (круг)
@@ -113,10 +118,28 @@ public partial class Lumememm : ContentPage
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(10) }
         };
 
+        tervalumememm = new View[]
+        {
+            pea,
+            keha,
+            amber,
+            amber2,
+            silm1,
+            silm2,
+            sall1,
+            sall2,
+            kasi1,
+            kasi2,
+            nupp1,
+            nupp2,
+            nupp3,
+            nina
+        };
+
         // Кнопки ---------------------------------------------------------------------------------------------------------------------
-        Button peida = new Button
+        Button NaitaPeida = new Button
         {
-            Text = "Peida",
+            Text = "Peida", // начальное состояние — показываем снеговика
             FontSize = 40,
             BackgroundColor = Colors.DarkBlue,
             TextColor = Colors.GhostWhite,
@@ -124,19 +147,25 @@ public partial class Lumememm : ContentPage
             FontFamily = "Luismi Murder 400",
         };
 
-        peida.Clicked += peida_Clicked;
-
-        Button naita = new Button
+        NaitaPeida.Clicked += (s, e) =>
         {
-            Text = "Näita",
-            FontSize = 40,
-            BackgroundColor = Colors.DarkBlue,
-            TextColor = Colors.GhostWhite,
-            CornerRadius = 20,
-            FontFamily = "Luismi Murder 400",
-        };
+            if (NaitaPeida.Text == "Peida")
+            {
+                // прячем снеговика
+                foreach (var v in tervalumememm)
+                    v.IsVisible = false;
 
-        naita.Clicked += naita_Clicked;
+                NaitaPeida.Text = "Näita"; // меняем надпись
+            }
+            else
+            {
+                // показываем снеговика
+                foreach (var v in tervalumememm)
+                    v.IsVisible = true;
+
+                NaitaPeida.Text = "Peida"; // меняем обратно
+            }
+        };
 
         Button varvi = new Button
         {
@@ -148,15 +177,33 @@ public partial class Lumememm : ContentPage
             FontFamily = "Luismi Murder 400",
         };
 
-        Button suluta = new Button
+        varvi.Clicked += varvi_Clicked;
+
+        Slider sulata = new Slider
         {
-            Text = "Suluta",
-            FontSize = 40,
-            BackgroundColor = Colors.DarkBlue,
-            TextColor = Colors.GhostWhite,
-            CornerRadius = 20,
-            FontFamily = "Luismi Murder 400",
+            Minimum = 0,   // начальное значение (0 = нормальный снеговик)
+            Maximum = 1,   // конечное значение (1 = растаял)
+            Value = 0,     // стартовая позиция
+            ThumbColor = Colors.DarkBlue,
+            MinimumTrackColor = Colors.LightBlue,
+            MaximumTrackColor = Colors.Gray
         };
+
+        sulata.ValueChanged += (s, e) =>
+        {
+            double progress = e.NewValue; // от 0 до 1
+
+            foreach (var v in tervalumememm)
+            {
+                // уменьшаем размер
+                v.Scale = 1 - 0.5 * progress;   // от 1 до 0.5
+                                                // смещаем вниз
+                v.TranslationY = 60 * progress; // от 0 до 60
+                                                // делаем прозрачнее
+                v.Opacity = 1 - progress;       // от 1 до 0
+            }
+        };
+
 
         Button tansi = new Button
         {
@@ -168,16 +215,30 @@ public partial class Lumememm : ContentPage
             FontFamily = "Luismi Murder 400",
         };
 
+        tansi.Clicked += tansi_Clicked;
+
         Button lahtesta = new Button
         {
             Text = "Lähtesta",
             FontSize = 40,
-            BackgroundColor = Colors.DarkBlue,
+            BackgroundColor = Colors.LightCoral,
             TextColor = Colors.GhostWhite,
             CornerRadius = 20,
             FontFamily = "Luismi Murder 400",
         };
 
+        lahtesta.Clicked += lahtesta_Clicked;
+
+        //Label nuppud = new Label
+        //{
+        //    Text = "Toimingunupud",
+        //    FontFamily = "Luismi Murder 400",
+        //    FontSize = 40,
+        //    FontAttributes = FontAttributes.Bold,
+        //    TextColor = Colors.DarkBlue,
+        //    HorizontalTextAlignment = TextAlignment.Center,
+        //    VerticalTextAlignment = TextAlignment.Center,
+        //};
 
         Frame panel1 = new Frame
         {
@@ -188,7 +249,7 @@ public partial class Lumememm : ContentPage
             Content = new HorizontalStackLayout
             {
                 Spacing = 10,
-                Children = { peida, naita, varvi }
+                Children = { NaitaPeida, varvi, tansi }
             }
         };
 
@@ -201,12 +262,29 @@ public partial class Lumememm : ContentPage
             Content = new HorizontalStackLayout
             {
                 Spacing = 10,
-                Children = { suluta, tansi, lahtesta }
+                Children = { lahtesta }
             }
         };
 
+        tervalumememm = new View[]
+        {
+            pea,
+            keha,
+            amber,
+            amber2,
+            silm1,
+            silm2,
+            sall1,
+            sall2,
+            kasi1,
+            kasi2,
+            nupp1,
+            nupp2,
+            nupp3,
+            nina
+        };
 
-        taust = new AbsoluteLayout { Children = { amber, amber2, silm1, silm2 ,pea, sall1, sall2, nina, keha, kasi1, kasi2, nupp1, nupp2, nupp3 } };
+        taust = new AbsoluteLayout { Children = { amber, amber2, silm1, silm2, pea, sall1, sall2, nina, keha, kasi1, kasi2, nupp1, nupp2, nupp3, sulata } };
         Background = Colors.LightSkyBlue;
 
         AbsoluteLayout.SetLayoutBounds(amber, new Rect(0.5, 0.20, 60, 80));
@@ -266,11 +344,20 @@ public partial class Lumememm : ContentPage
         AbsoluteLayout.SetLayoutFlags(nupp3, AbsoluteLayoutFlags.PositionProportional);
         nupp3.ZIndex = 6;
 
-        AbsoluteLayout.SetLayoutBounds(panel1, new Rect(0.5, 0.75, 1.0, 90));
+        //AbsoluteLayout.SetLayoutBounds(nuppud, new Rect(0.5, 0.65, 1.0, 90));
+        //AbsoluteLayout.SetLayoutFlags(nuppud, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
+        //nuppud.ZIndex = 19;
+
+
+        AbsoluteLayout.SetLayoutBounds(panel1, new Rect(0.5, 0.70, 1.0, 90));
         AbsoluteLayout.SetLayoutFlags(panel1, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
         panel1.ZIndex = 20;
 
-        AbsoluteLayout.SetLayoutBounds(panel2, new Rect(0.5, 0.9, 1.0, 90));
+        AbsoluteLayout.SetLayoutBounds(sulata, new Rect(0.5, 0.90, 1.0, 200));
+        AbsoluteLayout.SetLayoutFlags(sulata, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
+        sulata.ZIndex = 21;
+
+        AbsoluteLayout.SetLayoutBounds(panel2, new Rect(0.5, 0.95, 1.0, 90));
         AbsoluteLayout.SetLayoutFlags(panel2, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
         panel2.ZIndex = 20;
 
@@ -279,6 +366,8 @@ public partial class Lumememm : ContentPage
         Content = taust;
 
     }
+
+
     // ---------------------------------------------------------- НОС рисуем в канве ------------------------------------------------------------
     public class ninajoonis : IDrawable
     {
@@ -300,8 +389,7 @@ public partial class Lumememm : ContentPage
     // ------------------------------------------------------Функции-----------------------------------------------------------------
     private void peida_Clicked(object sender, EventArgs e)
     {
-        foreach (var v in new View[] 
-        { pea, keha, amber, amber2, silm1, silm2, sall1, sall2, kasi1, kasi2, nupp1, nupp2, nupp3, nina })
+        foreach (var v in tervalumememm)
             v.IsVisible = false;
 
         //pea.IsVisible = false;
@@ -321,9 +409,111 @@ public partial class Lumememm : ContentPage
     }
     private void naita_Clicked(object sender, EventArgs e)
     {
-        foreach (var v in new View[] 
-        { pea, keha, amber, amber2, silm1, silm2, sall1, sall2, kasi1, kasi2, nupp1, nupp2, nupp3, nina })
+        foreach (var v in tervalumememm)
             v.IsVisible = true;
+    }
+
+    private void varvi_Clicked(object sender, EventArgs e)
+    {
+        var randomColor = colors[rnd.Next(colors.Length)];
+        pea.BackgroundColor = randomColor;
+        keha.BackgroundColor = randomColor;
+    }
+
+    ////private void suluta_Clickes(object sender, EventArgs e)
+    ////{
+    ////    foreach (var v in tervalumememm)
+    ////    {
+    ////        // v.ScaleTo(2.0, 3000, Easing.CubicInOut); // Очень понравилось!
+    ////        v.ScaleTo(0.5, 3000, Easing.CubicInOut); // Изменяет масштаб элемента (увеличивает или уменьшает).
+    ////        v.TranslateTo(0, 60, 3000, Easing.CubicInOut); // Перемещает элемент по осям X и Y, easing → тип движения (ускорение/замедление).
+    ////        v.FadeTo(0, 3000, Easing.CubicIn); // Изменяет прозрачность элемента, easing → кривая плавности.
+    ////    }
+    ////}
+
+    private async void tansi_Clicked(object sender, EventArgs e)
+    {
+        {
+            // шаг влево + наклон влево
+            foreach (var v in tervalumememm)
+            {
+                v.TranslateTo(-20, v.TranslationY, 500, Easing.SinInOut);
+                v.RotateTo(-15, 500, Easing.SinInOut);
+            }
+
+            // через 600 мс — вправо
+            Device.StartTimer(TimeSpan.FromMilliseconds(600), () =>
+            {
+                foreach (var v in tervalumememm)
+                {
+                    v.TranslateTo(20, v.TranslationY, 500, Easing.SinInOut);
+                    v.RotateTo(15, 500, Easing.SinInOut);
+                }
+                return false; // один раз
+            });
+
+            // ещё через 600 мс — вернуть в центр
+            Device.StartTimer(TimeSpan.FromMilliseconds(1200), () =>
+            {
+                foreach (var v in tervalumememm)
+                {
+                    v.TranslateTo(0, v.TranslationY, 500, Easing.SinInOut);
+                    v.RotateTo(0, 500, Easing.SinInOut);
+                }
+                return false;
+            });
+
+            // Ржала в голос
+            ////foreach (var v in tervalumememm)
+            ////{
+            ////    await v.TranslateTo(-20, v.TranslationY, 500, Easing.SinInOut);
+            ////    await v.RotateTo(-15, 500, Easing.SinInOut);
+            ////}
+
+            ////foreach (var v in tervalumememm)
+            ////{
+            ////    await v.TranslateTo(20, v.TranslationY, 500, Easing.SinInOut);
+            ////    await v.RotateTo(15, 500, Easing.SinInOut);
+            ////}
+
+            ////foreach (var v in tervalumememm)
+            ////{
+            ////    await v.TranslateTo(0, v.TranslationY, 500, Easing.SinInOut);
+            ////    await v.RotateTo(0, 500, Easing.SinInOut);
+            ////}
+        }
+    }
+
+
+    private void lahtesta_Clicked(object sender, EventArgs e)
+    {
+        foreach (var v in tervalumememm)
+        {
+            // показываем все части
+            v.IsVisible = true;
+
+            // сбрасываем трансформации
+            v.TranslationX = 0;
+            v.TranslationY = 0;
+            v.Rotation = 0;
+            v.Scale = 1;
+            v.Opacity = 1;
+        }
+
+        // возвращаем базовые цвета
+        pea.BackgroundColor = Colors.GhostWhite;
+        keha.BackgroundColor = Colors.GhostWhite;
+        sall1.Color = Colors.Red;
+        sall2.Color = Colors.Red;
+        amber.Color = Colors.SaddleBrown;
+        amber2.Color = Colors.SaddleBrown;
+        kasi1.Background = Colors.SaddleBrown;
+        kasi2.Background = Colors.SaddleBrown;
+        silm1.Background = Colors.Black;
+        silm2.Background = Colors.Black;
+        nupp1.Background = Colors.Black;
+        nupp2.Background = Colors.Black;
+        nupp3.Background = Colors.Black;
     }
 
 }
