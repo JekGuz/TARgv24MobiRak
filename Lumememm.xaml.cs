@@ -86,7 +86,7 @@ public partial class Lumememm : ContentPage
             Background = Colors.SaddleBrown,
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(7) }, // Закругления
             StrokeThickness = 0, // Рамка не рисуется, остаётся только заливка
-            Rotation = -30 // Поворот
+            Rotation = -40 // Поворот
         };
 
         kasi2 = new Border
@@ -94,7 +94,7 @@ public partial class Lumememm : ContentPage
             Background = Colors.SaddleBrown,
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(7) },
             StrokeThickness = 0,
-            Rotation = 30
+            Rotation = 40
         };
 
         nupp1 = new Border
