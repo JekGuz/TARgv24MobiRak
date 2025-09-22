@@ -266,23 +266,6 @@ public partial class Lumememm : ContentPage
             }
         };
 
-        tervalumememm = new View[]
-        {
-            pea,
-            keha,
-            amber,
-            amber2,
-            silm1,
-            silm2,
-            sall1,
-            sall2,
-            kasi1,
-            kasi2,
-            nupp1,
-            nupp2,
-            nupp3,
-            nina
-        };
 
         taust = new AbsoluteLayout { Children = { amber, amber2, silm1, silm2, pea, sall1, sall2, nina, keha, kasi1, kasi2, nupp1, nupp2, nupp3, sulata } };
         Background = Colors.LightSkyBlue;
