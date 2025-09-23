@@ -55,8 +55,10 @@ public partial class DateTimePage : ContentPage
             FontSize = 30,
             FontFamily = "Luismi Murder 400",
             TextColor = Colors.Black,
-            ItemsSource = new List<string> { "Üks", "Kaks", "Kolm", "Neli", "Viis", "Kuus", "Seitse", "Kaheksa", "Üheksa", "Kuume", "Üksteist", "Kaksteist" }
-        };
+            //ItemsSource = new List<string> { "Üks", "Kaks", "Kolm", "Neli", "Viis", "Kuus", "Seitse", "Kaheksa", "Üheksa", "Kuume", "Üksteist", "Kaksteist" }
+            ItemsSource = new List<string> { "Teade", "ja/ei teade", "Valik", "Vaba vastus", "Viis" }
+
+            };
 
         //picker.Items.Add("Kuus");
         //picker.ItemsSource.Add("Kuus");
@@ -65,6 +67,23 @@ public partial class DateTimePage : ContentPage
             if (picker.SelectedIndex != -1)
             {
                 mis_on_valitud.Text = $"Valitud on: {picker.Items[picker.SelectedIndex]}";
+                if (picker.SelectedIndex == 0)
+                {
+                    DisplayAlert("Teade", "Meil on hea uudis!", "Selge");
+                }
+                else if (picker.SelectedIndex == 1)
+                {
+                    DisplayAlert("Küsimus", "Kas soovite jätkata?", "Jah", "Ei");
+                }
+                else if (picker.SelectedIndex == 2)
+                {
+                    var valik = new string[] { "Valik 1", "Valik 2", "Valik 3" };
+                    var tulemus = DisplayActionSheet("Palun vali", "Katkesta", null, valik);
+                }
+                else if (picker.SelectedIndex == 3)
+                {
+                    var tulemus = DisplayPromptAsync("Küsimus", "Sissesta oma vasus", "OK", "Katkesta", "Siia tuleb vastus", -1, Keyboard.Text, "Vastus");
+                }
             }
         };
 

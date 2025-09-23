@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
 
 
+
 namespace TARgv24;
 public partial class Lumememm : ContentPage
 {
@@ -16,6 +17,8 @@ public partial class Lumememm : ContentPage
 
     Random rnd = new Random();
     Color[] colors = { Colors.GhostWhite, Colors.LightYellow, Colors.LightPink, Colors.LightGreen, Colors.LightBlue, Colors.MintCream, Colors.Aqua, Colors.LightCoral, Colors.LightSalmon };
+
+    Grid snowLayer;
 
     public Lumememm()
     {
@@ -86,7 +89,7 @@ public partial class Lumememm : ContentPage
             Background = Colors.SaddleBrown,
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(7) }, // Закругления
             StrokeThickness = 0, // Рамка не рисуется, остаётся только заливка
-            Rotation = -40 // Поворот
+            Rotation = -30 // Поворот
         };
 
         kasi2 = new Border
@@ -94,7 +97,7 @@ public partial class Lumememm : ContentPage
             Background = Colors.SaddleBrown,
             StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(7) },
             StrokeThickness = 0,
-            Rotation = 40
+            Rotation = 30
         };
 
         nupp1 = new Border
@@ -268,7 +271,9 @@ public partial class Lumememm : ContentPage
 
 
         taust = new AbsoluteLayout { Children = { amber, amber2, silm1, silm2, pea, sall1, sall2, nina, keha, kasi1, kasi2, nupp1, nupp2, nupp3, sulata } };
-        Background = Colors.LightSkyBlue;
+        Title = "Lumememm";
+        //BackgroundColor = Colors.MistyRose;
+        BackgroundImageSource = "talv.png";
 
         AbsoluteLayout.SetLayoutBounds(amber, new Rect(0.5, 0.20, 60, 80));
         AbsoluteLayout.SetLayoutFlags(amber, AbsoluteLayoutFlags.PositionProportional);
@@ -344,11 +349,46 @@ public partial class Lumememm : ContentPage
         AbsoluteLayout.SetLayoutFlags(panel2, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
         panel2.ZIndex = 20;
 
+        snowLayer = new Grid { BackgroundColor = Colors.Transparent };
+        AbsoluteLayout.SetLayoutBounds(snowLayer, new Rect(0, 0, 1, 1));
+        AbsoluteLayout.SetLayoutFlags(snowLayer, AbsoluteLayoutFlags.All);
+        snowLayer.ZIndex = 99;
+
+
+        taust.Children.Add(snowLayer);
         taust.Children.Add(panel1);
         taust.Children.Add(panel2);
         Content = taust;
 
+        // Автоматический снег каждые 400 мс
+        Device.StartTimer(TimeSpan.FromMilliseconds(250), () =>
+        {
+            if (snowLayer.Width <= 0 || snowLayer.Height <= 0)
+                return true; // ждём разметку слоя
+
+            int flakesPerTick = 3; // 2–4 выглядит живее
+            for (int i = 0; i < flakesPerTick; i++)
+            {
+                double startX = rnd.NextDouble() * snowLayer.Width; // равномерно по ширине
+                double startY = -rnd.Next(10, 100); // чуть выше верхней границы
+                LisaLumi(startX, startY, "lumi.png");
+            }
+            return true; // повторять
+        });
+
+        // Снежинка по двойному тапу
+        var doubleTap = new TapGestureRecognizer { NumberOfTapsRequired = 2 };
+        doubleTap.Tapped += (s, e) =>
+        {
+            var p = e.GetPosition(snowLayer);
+            if (p != null)
+                LisaLumi(p.Value.X, p.Value.Y, "lumi.png");
+        };
+        snowLayer.GestureRecognizers.Add(doubleTap);
+
     }
+
+
 
 
     // ---------------------------------------------------------- НОС рисуем в канве ------------------------------------------------------------
@@ -398,9 +438,9 @@ public partial class Lumememm : ContentPage
 
     private void varvi_Clicked(object sender, EventArgs e)
     {
-        var randomColor = colors[rnd.Next(colors.Length)];
-        pea.BackgroundColor = randomColor;
-        keha.BackgroundColor = randomColor;
+        var randomvarv = colors[rnd.Next(colors.Length)];
+        pea.BackgroundColor = randomvarv;
+        keha.BackgroundColor = randomvarv;
     }
 
     ////private void suluta_Clickes(object sender, EventArgs e)
@@ -424,7 +464,7 @@ public partial class Lumememm : ContentPage
                 v.RotateTo(-15, 500, Easing.SinInOut);
             }
 
-            // через 600 мс — вправо
+            // запускает таймер с 600 интервалом.
             Device.StartTimer(TimeSpan.FromMilliseconds(600), () =>
             {
                 foreach (var v in tervalumememm)
@@ -435,7 +475,7 @@ public partial class Lumememm : ContentPage
                 return false; // один раз
             });
 
-            // ещё через 600 мс — вернуть в центр
+            // ещё через 1200 мс — вернуть в центр
             Device.StartTimer(TimeSpan.FromMilliseconds(1200), () =>
             {
                 foreach (var v in tervalumememm)
@@ -499,8 +539,33 @@ public partial class Lumememm : ContentPage
         nupp3.Background = Colors.Black;
     }
 
-}
 
+    private async void LisaLumi(double x, double y, string file)
+    {
+        var flake = new Image
+        {
+            Source = file,
+            HeightRequest = rnd.Next(12, 40),
+            WidthRequest = rnd.Next(12, 40),
+            Opacity = 0.9
+        };
+
+        AbsoluteLayout.SetLayoutBounds(flake, new Rect(x, y, flake.WidthRequest, flake.HeightRequest));
+        AbsoluteLayout.SetLayoutFlags(flake, AbsoluteLayoutFlags.None);
+        snowLayer.Children.Add(flake);
+
+        double targetX = x + rnd.Next(-60, 60);// ветер посильнее
+        double h = snowLayer.Height > 0 ? snowLayer.Height : this.Height;
+        double targetY = h;
+        uint duration = (uint)rnd.Next(2500, 6500);
+
+        await flake.TranslateTo(targetX - x, targetY - y, duration, Easing.Linear);
+        snowLayer.Children.Remove(flake);
+    }
+
+
+
+}
 
 
 
