@@ -37,7 +37,6 @@ public partial class GridPage : ContentPage
 
             }
 			Content = grid;
-
 		
 	}
 }

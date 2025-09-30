@@ -249,6 +249,7 @@ public partial class Lumememm : ContentPage
             Padding = new Thickness(12, 10),
             CornerRadius = 16,
             HasShadow = true,
+
             Content = new HorizontalStackLayout
             {
                 Spacing = 10,
