@@ -113,9 +113,13 @@ public partial class PuslePage : ContentPage
                     HeightRequest = 100
                 };
 
-                AddPiedesGasteres(img, id); // Lisame pildi zestid
-                pieceImages[id] = img;
+                AddPiedesGasteres(pieceImage, id); // изм
+                pieceImages[id] = pieceImage; // изм
                 correctPositions[(r, c)] = id;
+
+                Grid.SetRow(pieceImage, r);
+                Grid.SetColumn(pieceImage, c);
+                sourcegrid.Children.Add(pieceImage);
             }
         }
         for (int r = 0; r < Rows; r++)
@@ -138,13 +142,20 @@ public partial class PuslePage : ContentPage
 
     private void AddPiedesGasteres(Image img, string id)
     {
-        //Drag and drop
-        img.GestureRecognizers.Add(new DragGestureRecognizer
-        {
-            CanDrag = true,
-            DragStartingCommand = new Command<DragStartingEventArgs>(args =>
-            { args.Data.Properties["id"] = id; })
-        });
+        ////Drag and drop
+        //img.GestureRecognizers.Add(new DragGestureRecognizer
+        //{
+        //    CanDrag = true,
+        //    DragStartingCommand = new Command<DragStartingEventArgs>(args =>
+        //    { args.Data.Properties["id"] = id; })
+        //});
+
+        if (img == null) throw new ArgumentNullException(nameof(img));
+
+        var drag = new DragGestureRecognizer { CanDrag = true };
+        drag.DragStarting += (s, e) => e.Data.Properties["id"] = id ?? string.Empty;
+        img.GestureRecognizers.Add(drag);
+
     }
     private async Task PickImageAsync()
     {
